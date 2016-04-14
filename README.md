@@ -1,0 +1,1 @@
+# mintie-case-study
