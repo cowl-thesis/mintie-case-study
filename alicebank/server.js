@@ -19,7 +19,7 @@ app.get('/data', function (req, res) {
 
   var labeledObj = {
     confidentiality: "'self'",
-    integrity: "'none'",
+    integrity: "'self'",
     object: {
       transactions: transactions
     }

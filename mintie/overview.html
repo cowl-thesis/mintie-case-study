@@ -1,3 +1,7 @@
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+   <link rel="stylesheet" href="//mintie.com:3000/style.css">
+</head>
 <body>
   <h1>Categories</h1>
   <ul id="categories"></ul>
@@ -8,40 +12,5 @@
       <div class="category-spending"></div>
     </li>
   </template>
-
-  <script type="text/javascript" charset="utf-8">
-  console.log('Inside iframe');
-  function onReceive(ev) {
-    console.log('A msg');
-    var data = ev.data;
-    //var protectedObj = data.protectedObject;
-    // var categories = protectedObj['categories'];
-    //console.log('Received data', data);
-    //console.log('Categories', categories);
-
-    // displayCategories(categories);
-     // figure out who it is from
-  }
-  window.addEventListener('message', onReceive, false);
-
-  // tell parent that we are ready...
-  function onDOMLoaded() {
-    parent.postMessage('ready', '*');
-  }
-  window.addEventListener('DOMContentLoaded', onDOMLoaded, false);
-
-  function displayCategories(categories) {
-    var categoriesEl = document.getElementById('categories');
-    var tmpl = document.getElementById('category-template');
-
-    // show category
-    categories.forEach(function(category) {
-      var tmplClone = tmpl.content.cloneNode(true);
-      tmplClone.querySelector('.category-title').innerText = category.title;
-      tmplClone.querySelector('.category-spending').innerText = "$0";
-      categoriesEl.appendChild(tmplClone);
-    });
-  }
-
-  </script>
+  <script type="text/javascript" src="//mintie.com:3000/overview_script.js"></script>
 </body>
