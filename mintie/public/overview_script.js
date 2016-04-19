@@ -6,6 +6,7 @@
     categoriesArray.forEach(function(data) {
       categories[data.id] = {};
       categories[data.id]['title'] = data.title;
+      categories[data.id]['budget'] = data.budget;
       categories[data.id]['transactions'] = [];
     });
 
@@ -89,15 +90,40 @@
         // calculate sum etc
         var sum = 0;
 
+        var transEl = tmplClone.querySelector('.category-transactions');
+
         transactions.forEach(function(trans) {
           sum += parseInt(trans.amount);
+
+          var li = document.createElement('li');
+          li.innerText = trans.date + ' - Account: ' + trans.account_id + ' - $' + trans.amount;
+          transEl.appendChild(li);
         });
 
-        tmplClone.querySelector('.category-spending').innerText = "$" + sum;
+        var spendingText = "$" + sum;
+
+        if (category.budget) {
+          spendingText += ' / $' + category.budget;
+        }
+        tmplClone.querySelector('.category-spending').innerText = spendingText;
 
       }
+
       categoriesEl.appendChild(tmplClone);
     });
   }
 
+
+document.getElementById("categories").addEventListener("click",function(e) {
+  if (e.target && e.target.matches("li.category")) {
+    var el = e.target;
+    var transEl = el.querySelector('.category-transactions');
+    if (transEl.style.display == 'block') {
+      transEl.style.display = 'none';
+    } else {
+      transEl.style.display = 'block';
+    }
+    // toggle list...
+  }
+});
 

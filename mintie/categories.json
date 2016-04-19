@@ -1,10 +1,12 @@
 [
   {
     "id": "food",
-    "title": "Food"
+    "title": "Food",
+    "budget": "200"
   },
   {
     "id": "savings",
-    "title": "Savings"
+    "title": "Savings",
+    "budget": "300"
   }
 ]
