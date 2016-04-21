@@ -4,15 +4,18 @@
   function constructCategories(categoriesArray) {
 
     categoriesArray.forEach(function(data) {
+      console.log('Data', data);
       categories[data.id] = {};
       categories[data.id]['title'] = data.title;
       categories[data.id]['budget'] = data.budget;
+      categories[data.id]['icon'] = data.icon;
       categories[data.id]['transactions'] = [];
     });
 
     // add category for unknown bank accounts
     categories['unknown'] = {
       title: 'Uncategorized',
+      icon: 'glyphicon-question-sign',
       transactions: []
     };
 
@@ -83,6 +86,8 @@
       var tmplClone = tmpl.content.cloneNode(true);
       tmplClone.querySelector('.category').setAttribute('data-category', key);
       tmplClone.querySelector('.category-title').innerText = category.title;
+
+      tmplClone.querySelector('.category-icon').className += ' ' + category.icon;
 
       if (!category.transactions) {
         tmplClone.querySelector('.category-spending').innerText = "$0";

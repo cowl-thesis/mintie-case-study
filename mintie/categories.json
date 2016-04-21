@@ -2,11 +2,13 @@
   {
     "id": "food",
     "title": "Food",
-    "budget": "200"
+    "budget": "200",
+    "icon": "glyphicon-glass"
   },
   {
     "id": "savings",
     "title": "Savings",
-    "budget": "300"
+    "budget": "300",
+    "icon": "glyphicon-piggy-bank"
   }
 ]
