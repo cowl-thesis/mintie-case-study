@@ -1,17 +1,66 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
    <link rel="stylesheet" href="//mintie.com:3000/style.css">
+   <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <h1>Categories</h1>
-  <ul id="categories"></ul>
+
+  <div style="text-align:center;">
+    <h1>Mintie</h1>
+    <p class="lead">Budgeting made simple</p>
+  </div>
+
+
+  <div class="container-fluid">
+    <div id="categories" class="row"></div>
+  </div>
 
   <template id="category-template">
-    <li class="category">
+    <div class="category col-md-4 btn text-center" data-toggle="modal" data-target="#transactions-modal">
       <h2 class="category-title"></h2>
       <div class="category-spending"></div>
-      <ul style="display:none" class="category-transactions"></ul>
-    </li>
+    </div>
   </template>
+
+  <template id="transaction-template">
+    <tr>
+      <td class="date"></td>
+      <td class="account"></td>
+      <td class="amount"></td>
+    </tr>
+  </template>
+
+  <div id="transactions-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Transactions</h4>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Account</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="//mintie.com:3000/overview_script.js"></script>
+
+
 </body>

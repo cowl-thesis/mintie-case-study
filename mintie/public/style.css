@@ -1,16 +1,4 @@
-body {
-  font: 1em/1.5 "Helvetica Neue", Helvetica, sans-serif;
-}
+/* body { */
+/*   font: 1em/1.5 "Helvetica Neue", Helvetica, sans-serif; */
+/* } */
 
-ul#categories {
-  list-style: none;
-}
-
-li.category {
-  background: #eee;
-  cursor: pointer;
-}
-
-h2.category-title {
-
-}

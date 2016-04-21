@@ -81,6 +81,7 @@
     Object.keys(categories).forEach(function(key) {
       var category = categories[key];
       var tmplClone = tmpl.content.cloneNode(true);
+      tmplClone.querySelector('.category').setAttribute('data-category', key);
       tmplClone.querySelector('.category-title').innerText = category.title;
 
       if (!category.transactions) {
@@ -90,14 +91,8 @@
         // calculate sum etc
         var sum = 0;
 
-        var transEl = tmplClone.querySelector('.category-transactions');
-
         transactions.forEach(function(trans) {
           sum += parseInt(trans.amount);
-
-          var li = document.createElement('li');
-          li.innerText = trans.date + ' - Account: ' + trans.account_id + ' - $' + trans.amount;
-          transEl.appendChild(li);
         });
 
         var spendingText = "$" + sum;
@@ -114,16 +109,26 @@
   }
 
 
-document.getElementById("categories").addEventListener("click",function(e) {
-  if (e.target && e.target.matches("li.category")) {
-    var el = e.target;
-    var transEl = el.querySelector('.category-transactions');
-    if (transEl.style.display == 'block') {
-      transEl.style.display = 'none';
-    } else {
-      transEl.style.display = 'block';
-    }
-    // toggle list...
-  }
+$('#transactions-modal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget);
+  var cID = button.data('category'); // Extract info from data-* attributes
+  var category = categories[cID];
+
+  var modal = $(this);
+  var modalTbody = modal.find('tbody').empty()[0];
+
+  // go through each transaciton
+  // append a template
+  var transactions = category.transactions;
+  var transactionEl = document.getElementById('transaction-template');
+
+  transactions.forEach(function(transaction) {
+    var tmpl = transactionEl.content.cloneNode(true);
+    tmpl.querySelector('.date').innerText = transaction.date;
+    tmpl.querySelector('.account').innerText = transaction.account_id;
+    tmpl.querySelector('.amount').innerText = '$' + transaction.amount;
+
+    modalTbody.appendChild(tmpl);
+  });
 });
 
