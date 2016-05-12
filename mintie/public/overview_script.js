@@ -1,5 +1,6 @@
   var categories = {};
   var accounts = {};
+  var transactions = [];
 
   function constructCategories(categoriesArray) {
 
@@ -22,8 +23,9 @@
     console.log('Categories', categories);
   }
 
-  function constructAccounts(accountsArray) {
-    accountsArray.forEach(function(data) {
+  function constructAccounts(accountsObj) {
+    Object.keys(accountsObj).forEach(function(key) {
+      var data = accountsObj[key];
       accounts[data.account_id] = data.category;
     });
   }

@@ -1,10 +1,10 @@
-[
-  {
+{
+  "105": {
     "category": "food",
     "account_id": "105"
   },
-  {
+  "33": {
     "category": "savings",
     "account_id": "33"
   }
-]
+}
